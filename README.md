@@ -3,7 +3,7 @@
 **[Nathan Schneider](http://nathan.cl)**  
 2016-04-30
 
-Django is a powerful and popular web framework built on Python. It has extensive [documentation](https://docs.djangoproject.com/en/1.9/). I have compiled the notes below mostly by working through the [tutorial](https://docs.djangoproject.com/en/1.9/intro/).
+Django is a powerful and popular web framework built on Python. It has extensive [documentation](https://docs.djangoproject.com/en/1.9/). I have compiled the notes below mostly by working through the [tutorial](https://docs.djangoproject.com/en/1.9/intro/). Most of the code examples are from the tutorial's sample web poll app.
 
 # Basic architecture
 
