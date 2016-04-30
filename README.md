@@ -224,12 +224,13 @@ When providing the view to the `url()` function in urls.py, the class method `as
 ### [`DetailView`](https://docs.djangoproject.com/en/1.9/ref/class-based-views/generic-display/#detailview): show information about a single object.
 
 Look up an object (of a specified model) by its primary key (`pk`) and render it in `template_name` (defaults to `<appname>/<modelname>_detail.html`).
-  ```py
-   class ResultsView(generic.DetailView):
+
+```py
+class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html' # default: 'polls/question_detail.html'
     # default: context_object = 'question'
-  ```
+```
 
 Corresponding urls.py pattern:
 
@@ -244,15 +245,15 @@ Look up a set of objects (of a specified model) and render them in `template_nam
   - Other methods defined by the `MultipleObjectMixin` are also, presumably, overloadable. E.g., `get_ordering()` and methods for pagination.
   
 ```py
-  class IndexView(generic.ListView):
+class IndexView(generic.ListView):
     template_name = 'polls/index.html' # default: 'polls/question_list.html'
     context_object_name = 'latest_question_list' # default: question_list
-
+    
     def get_queryset(self):
-    """Return the last five published questions."""
-    return Question.objects.order_by('-pub_date')[:5]
-  ```
-      
+        """Return the last five published questions."""
+        return Question.objects.order_by('-pub_date')[:5]
+```
+
 ### Other generic views 
 
 are available for [redirects](https://docs.djangoproject.com/en/1.9/ref/class-based-views/base/#redirectview), [forms/editing](https://docs.djangoproject.com/en/1.9/ref/class-based-views/generic-editing/), and [date-based data](https://docs.djangoproject.com/en/1.9/ref/class-based-views/generic-date-based/) such as archives.
