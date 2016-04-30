@@ -158,6 +158,14 @@ templates go in `templates/<appname>` subdirectory of app
   * included template is rendered with the same context as the including template
 - [more on templates](https://docs.djangoproject.com/en/1.9/topics/templates/)
 
+## static files
+
+Under an app directory, `static/<appname>/static` is the default home for the app's static files—images, JS, CSS, etc.
+
+Templates must first call `{% load staticfiles %}` and will then be able to construct static file paths, e.g.: `{% static 'polls/style.css' %}`
+
+[more on static files](https://docs.djangoproject.com/en/1.9/intro/tutorial06/)
+
 ## forms
 
 example from [[1]](https://docs.djangoproject.com/en/1.9/intro/tutorial04/)
