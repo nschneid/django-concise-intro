@@ -45,38 +45,38 @@ Each project also encapsulates command-line utilities and an admin web portal.
     from django.shortcuts import get_object_or_404, get_list_or_404, render
     from django.template import loader
     from .models import Question
-def index_simple(request):
-      return HttpResponse("Hello, world. You're at the polls index.")
+    def index_simple(request):
+        return HttpResponse("Hello, world. You're at the polls index.")
       
     def detail_simple(request, question_id): # question_id is an arg from a URL regex group
-      return HttpResponse("You're looking at question %s." % question_id)
+        return HttpResponse("You're looking at question %s." % question_id)
     
     def index(request):
-      latest_question_list = Question.objects.order_by('-pub_date')[:5]
-      template = loader.get_template('polls/index.html')
-      context = {'latest_question_list': latest_question_list}
-      return render(request, 'polls/index.html', context)
-      # equivalently: return HttpResponse(template.render(context, request))
+        latest_question_list = Question.objects.order_by('-pub_date')[:5]
+        template = loader.get_template('polls/index.html')
+        context = {'latest_question_list': latest_question_list}
+        return render(request, 'polls/index.html', context)
+        # equivalently: return HttpResponse(template.render(context, request))
     
     def detail(request, question_id):
-      # try Question.objects.get(pk=question_id)
-      question = get_object_or_404(Question, pk=question_id)
-      return render(request, 'polls/detail.html', {'question': question})
-
+        # try Question.objects.get(pk=question_id)
+        question = get_object_or_404(Question, pk=question_id)
+        return render(request, 'polls/detail.html', {'question': question})
     ```
   - urls.py: URLs within the app (appended to project part of URL)
-      ```py
-      from django.conf.urls import url
-      from . import views
-      urlpatterns = [
-          url(r'^$', views.index, name='index'),
-          url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
-      ]
-      ```
+   
+    ```py
+    from django.conf.urls import url
+    from . import views
+    urlpatterns = [
+        url(r'^$', views.index, name='index'),
+        url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
+    ]
+    ```
     * project urls.py can `include('appname.urls')`
     * app urls.py can specify a namespace by setting `app_name`
   - models.py: define classes to serve as database tables and class fields (holding a `models.Field` subclass) to serve as columns
-      ```py
+    ```py
     from django.db import models
     class Question(models.Model):
         question_text = models.CharField(max_length=200)
@@ -90,29 +90,29 @@ def index_simple(request):
         # foreign key: links to a record in another table
         choice_text = models.CharField(max_length=200)
         votes = models.IntegerField(default=0)
-        ```
+    ```
     * project settings.py needs to register the app in `INSTALLED_APPS`. Then `migrate` will know to take care of database operations for the app's models.
     * `id` field added automatically as a primary key. `pk` is an alias for the primary key.
     * it is recommended to define a `__str__()` method for each model class
     * can explore the models and data with `manage.py shell`:
-        ```py
-      # Import the model classes we just wrote.
-      >>> from polls.models import Question, Choice
-      # access the records
-      >>> Question.objects.all()
-      # query with constraints
-      >>> Question.objects.filter(id=3)
-      >>> Question.objects.filter(question_text__startswith='What')
-      # chaining of fields
-      >>> Choice.objects.filter(question__question_text__startswith='What') # all choices whose question has text starting with...
-      # Can instantiate a Question, and call .save() on it to add a record.
-      # Because Choice uses Question as a foreign key, we can reverse-access from a question q with:
-      >>> q.choice_set
-      # and can even create new Choice records via a Question record:
-      >>> c = q.choice_set.create(choice_text='asdf', votes=3)
-      # a record can also be deleted
-      >>> c.delete()
-      ```
+    ```py
+    # Import the model classes we just wrote.
+    >>> from polls.models import Question, Choice
+    # access the records
+    >>> Question.objects.all()
+    # query with constraints
+    >>> Question.objects.filter(id=3)
+    >>> Question.objects.filter(question_text__startswith='What')
+    # chaining of fields
+    >>> Choice.objects.filter(question__question_text__startswith='What') # all choices whose question has text starting with...
+    # Can instantiate a Question, and call .save() on it to add a record.
+    # Because Choice uses Question as a foreign key, we can reverse-access from a question q with:
+    >>> q.choice_set
+    # and can even create new Choice records via a Question record:
+    >>> c = q.choice_set.create(choice_text='asdf', votes=3)
+    # a record can also be deleted
+    >>> c.delete()
+    ```
 
 ## web admin
 
