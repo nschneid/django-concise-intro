@@ -146,11 +146,11 @@ templates go in `templates/<appname>` subdirectory of app
 {% endif %}
       
       ```
-  - `{% url <urlname> <args>}` to construct a URL based on urls.py
+  - `{% url <urlname> <args> %}` to construct a URL based on urls.py
     * arguments may be positional XOR keyword
-    * `{% url <urlname> <args> as v}` stores the URL in a variable
+    * `{% url <urlname> <args> as v %}` stores the URL in a variable
     * trying to construct a nonexistent URL will cause an error unless `as` syntax is used
-    * if urls.py is namespaced with an `app_name`, then use `{% url <appname>:<urlname> <args>}`
+    * if urls.py is namespaced with an `app_name`, then use `{% url <appname>:<urlname> <args> %}`
     * the `url` command is called a *tag*. [url tag ref](https://docs.djangoproject.com/en/1.9/ref/templates/builtins/#url)
 
 
