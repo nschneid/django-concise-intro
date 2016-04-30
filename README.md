@@ -163,6 +163,7 @@ templates go in `templates/<appname>` subdirectory of app
 Under an app directory, `static/<appname>/static` is the default home for the app's static files—images, JS, CSS, etc.
 
 Templates must first call `{% load staticfiles %}` and will then be able to construct static file paths, e.g.: `{% static 'polls/style.css' %}`
+* As with the `url` tag, the `static` tag supports an `as` variable: `{% static 'polls/style.css' as stylesheet %}`
 
 [more on static files](https://docs.djangoproject.com/en/1.9/intro/tutorial06/)
 
