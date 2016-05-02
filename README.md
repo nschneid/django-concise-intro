@@ -155,7 +155,34 @@ templates go in `templates/<appname>` subdirectory of app
 
 
 - templates can be composed with the [`include` tag](https://docs.djangoproject.com/en/1.9/ref/templates/builtins/#include): `{% include "foo/bar.html" %}`
-  * included template is rendered with the same context as the including template
+    * included template is rendered with the same context as the including template
+- **[template inheritance](https://docs.djangoproject.com/en/1.9/ref/templates/language/#template-inheritance):** a template can define a skeleton with named blocks to be filled in by extending (inheriting) templates.
+    * base template:
+    ```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <title>{% block title %}My amazing site{% endblock %}</title>
+</head>
+```
+    * child template—must begin with `extends`, can override contents of parent blocks:
+    ```html
+    {% extends "base.html" %}
+    
+    {% block title %}My amazing blog{% endblock %}
+    ``` 
+    * `{{ block.super }}` inserts the parent block's content
+    * `endblock`s may optionally be named: `{% endblock title %}`
+- control structure template tags: `for`/`endfor`, `if`/`elif`/`else`/`endif`
+- **[template filters](https://docs.djangoproject.com/en/1.9/ref/templates/builtins/#ref-templates-builtins-filters)** modify the variable being rendered. E.g.:
+    * `{{ value|lowercase }}`
+    * `{{ value|length }}`
+    * `{{ value|join:", " }}`
+    * default in case a value is falsy: `{{ value|default:"&gt;:-(" }}`
+- `{# this is a template comment #}`
+- template variables are [autoescaped](https://docs.djangoproject.com/en/1.9/ref/templates/language/#automatic-html-escaping) by default, but this can be turned off for individual variables (`{{ value|safe }}`) or blocks
+    * strings passed to filter literals are not autoescaped
 - [more on templates](https://docs.djangoproject.com/en/1.9/topics/templates/)
 
 ## static files
