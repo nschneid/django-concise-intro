@@ -141,10 +141,9 @@ templates go in `templates/<appname>` subdirectory of app
         <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
     {% endfor %}
     </ul>
-{% else %}
+    {% else %}
     <p>No polls are available.</p>
-{% endif %}
-      
+    {% endif %}
       ```
   - `{% url <urlname> <args> %}` to construct a URL based on urls.py
     * arguments may be positional XOR keyword
@@ -159,13 +158,13 @@ templates go in `templates/<appname>` subdirectory of app
 - **[template inheritance](https://docs.djangoproject.com/en/1.9/ref/templates/language/#template-inheritance):** a template can define a skeleton with named blocks to be filled in by extending (inheriting) templates.
     * base template:
     ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="style.css" />
-    <title>{% block title %}My amazing site{% endblock %}</title>
-</head>
-```
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <link rel="stylesheet" href="style.css" />
+        <title>{% block title %}My amazing site{% endblock %}</title>
+    </head>
+    ```
     * child template—must begin with `extends`, can override contents of parent blocks:
     ```html
     {% extends "base.html" %}
